@@ -1,0 +1,35 @@
+@media screen and (min-width: 768px) {
+    .container{
+    grid-template-columns: 300px auto;
+}
+}
+@media screen and (max-width: 768px) {
+    .container{
+    grid-template-columns: auto;
+    }
+    .course{
+        @apply flex h-16 w-auto;
+    }
+
+}
+@media (min-width: 1440px) {
+    .papers{
+        @apply grid-cols-3;
+    }
+}
+    
+/* Only the scroll bar */
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,.15);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,.3);
+}
+
+.btn{
+    @apply bg-indigo-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded 
+}

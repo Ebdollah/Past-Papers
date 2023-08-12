@@ -1,66 +1,113 @@
-import React from 'react'
-// import Logo from  "../assets/my-logo.png";
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState } from 'react';
+import logo from "../assets/logo.png";
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
-function Navbar() {
+const Navbar = () => {
 
 
-  const [nav, setNave] = React.useState(false);
-  const handleClick = () => setNave(!nav);
+  const scrollToSection = (sectionId) => {
+    const section = document.querySelector(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+
+  const userRole = localStorage.getItem('role');
+  const token = localStorage.getItem('token');
+
+  const signout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You will be logged out of the portal",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'red',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Yes, log me out!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        window.location.reload();
+      }
+    })
+
+  }
 
   return (
+    <nav className="bg-indigo-800  shadow-sm">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <Link to="/" className="flex items-center">
+          <img src={logo} className="h-12 mr-3" alt="Logo" />
+        </Link>
+        <button
+          onClick={handleMobileMenuToggle}
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        >
+          <span className="sr-only">Open main menu</span>
+          <svg className="w-5 h-5 text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
+        </button>
+        <div className={`w-full md:w-auto md:flex md:items-center ${isMobileMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
+          <ul className=" text-white font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-5 md:mt-0 md:border-0 ">
+            {
+              token ? (
+                <>
 
-    <div className='fixed w-full h-[90px] flex px-4 bg-[#0a192f] text-gray-300'>
-      <div className='flex justify-between items-center w-full'>
-        <div className='flex items-center'>
-          <img
-            src="https://www.flaticon.com/free-icon/atom_4625470?related_id=4625470&origin=pack"
-            alt="logo"
-            className='w-[50px] h-[50px]'
-          />
-          <ul className='hidden md:flex ml-11 space-x-4 text-[1.45rem]'>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
+                  {
+                    userRole === 'admin' ?
+                      (
+                        <>
+                          <li> <Link to="/admin" className="block py-2 pl-3 pr-4 hover:bg-indigo-900 rounded md:px-3 md:py-2 md:p-0 " >Dashboard</Link></li>
+                        </>
+                      ) : (
+                        <>
+                          <li>
+                            <Link to="/main" className=" block py-2 pl-3 pr-4 hover:bg-indigo-900 rounded md:px-3 md:py-2 md:p-0 " >Papers</Link>
+
+                          </li>
+                          
+                        </>
+                      )}
+                  <li>
+                    <button onClick={signout} className="btn  ">Sign out</button>
+                  </li>
+                </>
+
+              ) : (
+                <>
+                  <li>
+                    <Link to="/" className="block py-2 pl-3 pr-4 hover:bg-indigo-900 rounded md:px-3 md:py-2 md:p-0 " >Home</Link>
+
+                  </li>
+                  <li className=''>
+                    <Link to="/" onClick={() => scrollToSection('#about')} className="block py-2 pl-3 pr-4 rounded hover:bg-indigo-900  md:border-0  md:px-3 md:py-2 ">About</Link>
+                  </li>
+                  <li>
+                    <Link to="/" onClick={() => scrollToSection('#contact')} className="block py-2 pl-3 pr-4 rounded hover:bg-indigo-900 md:px-3 md:py-2 md:border-0  md:p-0 ">Contact</Link>
+                  </li>
+                  <li>
+                    <Link to="/login" className="block py-2 pl-3 pr-4  rounded bg-indigo-500 hover:bg-indigo-900 md:px-3 md:py-2 md:border-0  md:p-0">Sign in</Link>
+                  </li>
+                </>
+              )
+            }
+
+
           </ul>
         </div>
-        <div className='hidden md:flex items-center'>
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-4 py-2 pr-10 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none w-64"
-          />
-        </div>
-        <div className="sm:hidden mr-10 ">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-0 py-1 pr-2 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none w-15"
-          />
-        </div>
-      
-
-
       </div>
-      <div onClick={handleClick} className='md:hidden z-10 mt-7'>
-        {!nav ? <FaBars className='text-3xl' /> : <FaTimes className='text-3xl' />}
-      </div>
+    </nav>
+  );
+};
 
-      {console.log("Value of nav is " + !nav)}{/*top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center */}
-      {/* Mobile Menu */} {/* !nav means true so its value if currently true 'Mobile Menu will not be shown due to 'hidden' property.*/}
-      <ul className={!nav ? 'hidden' : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center"}>
-        <li className='py-5 text-2xl'>Home</li>
-        <li className='py-5 text-2xl'>About</li>
-        <li className='py-5 text-2xl'>Contact</li>
-      </ul>
-      {/* Social Icons  */}
-      <div className='hidden'></div>
-
-    </div>
-  )
-
-}
-
-export default Navbar
-
-//////////////////////////////////
+export default Navbar;

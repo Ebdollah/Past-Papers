@@ -1,47 +1,53 @@
-import React from 'react'
+import React from 'react';
+import { FaDiscord, FaTwitter, FaGithub, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import logo from "../assets/logo.png"
+const Footer = () => {
+  return (
+    <footer className="bg-indigo-800 mt-10">
+      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div className="md:flex md:justify-between">
+          <div className="mb-6 md:mb-0">
+            <Link to='/'>
+              <img src={logo} className="h-12 mr-3" alt="Logo" />
+            </Link>
 
-function Footer() {
-    return (
-        <div>
-            <footer class="text-gray-600 body-font bg-blue-800">
-                <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-                    <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                        </svg>
-                        <span class="ml-3 text-xl">PastPapers</span>
-                    </a>
-                    <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 PastPapers —
-                        {/* <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@knyttneve</a> */}
-                    </p>
-                    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-                        <a class="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500">
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
-                                <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-                                <circle cx="4" cy="4" r="2" stroke="none"></circle>
-                            </svg>
-                        </a>
-                    </span>
-                </div>
-            </footer>
+          </div>
+          <div className="flex text-white mt-4 space-x-5 sm:justify-center sm:mt-0">
+            <a href="facebook.com" target='_blank' rel='noreferrer' className="  hover:text-blue-500 duration-300">
+              <FaFacebook className="w-8 h-8" />
+              <span className="sr-only">Facebook page</span>
+            </a>
+            <a href="https://www.discord.com" target='_blank' rel='noreferrer' className=" hover:text-purple-500 duration-300 ">
+              <FaDiscord className="w-8 h-8" />
+              <span className="sr-only">Discord community</span>
+            </a>
+            <a href="https://www.twitter.com" target='_blank' rel='noreferrer' className=" hover:text-blue-300 duration-300 ">
+              <FaTwitter className="w-8 h-8" />
+              <span className="sr-only">Twitter page</span>
+            </a>
+            <a href="https://www.github.com" target='_blank' rel='noreferrer' className=" hover:text-black duration-300" >
+              <FaGithub className="w-8 h-8" />
+              <span className="sr-only">GitHub account</span>
+            </a>
+            <a href="https://www.linkedin.com" target='_blank' rel='noreferrer' className=" hover:text-blue-500 duration-300">
+              <FaLinkedin className="w-8 h-8" />
+              <span className="sr-only">LinkedIn account</span>
+            </a>
+            <a href="https://www.instagram.com" target='_blank' rel='noreferrer' className=" hover:text-pink-500 duration-300">
+              <FaInstagram className="w-8 h-8" />
+              <span className="sr-only">Instagram account</span>
+            </a>
+          </div>
+
         </div>
-    )
-}
+        <hr className="my-6 border-gray-200 sm:mx-auto d lg:my-8" />
+        <div className=" text-gray-300 flex items-center justify-center">
+          <span className="text-sm ">© 2023 <Link to="/" className="hover:underline">PaperSource™</Link>. All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;
